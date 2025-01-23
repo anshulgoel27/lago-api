@@ -12,54 +12,12 @@ RSpec.describe LagoUtils::License do
   end
 
   describe '#verify' do
-    context 'when license is valid' do
-      let(:response) do
-        {
-          'valid' => true
-        }.to_json
-      end
-
-      before do
-        stub_request(:get, "#{url}/verify/test-license")
-          .to_return(body: response, status: 200)
-      end
-
-      it 'sets premium to true' do
-        license.verify
-
-        expect(license).to be_premium
-      end
+    before do
+      license.verify
     end
 
-    context 'when license is not present' do
-      before do
-        ENV['LAGO_LICENSE'] = nil
-      end
-
-      it 'keeps premium to false' do
-        license.verify
-
-        expect(license).not_to be_premium
-      end
-    end
-
-    context 'when license is invalid' do
-      let(:response) do
-        {
-          'valid' => false
-        }.to_json
-      end
-
-      before do
-        stub_request(:get, "#{url}/verify/test-license")
-          .to_return(body: response, status: 200)
-      end
-
-      it 'keeps premium to false' do
-        license.verify
-
-        expect(license).not_to be_premium
-      end
+    it 'always sets premium to true' do
+      expect(license).to be_premium
     end
   end
 end

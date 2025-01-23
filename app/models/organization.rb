@@ -65,7 +65,7 @@ class Organization < ApplicationRecord
   INTEGRATIONS = %w[
     netsuite okta anrok xero progressive_billing hubspot auto_dunning revenue_analytics salesforce api_permissions revenue_share
   ].freeze
-  PREMIUM_INTEGRATIONS = INTEGRATIONS - %w[anrok]
+  PREMIUM_INTEGRATIONS = INTEGRATIONS
 
   enum :document_numbering, DOCUMENT_NUMBERINGS
 

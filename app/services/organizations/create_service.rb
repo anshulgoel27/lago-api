@@ -8,8 +8,11 @@ module Organizations
     end
 
     def call
+      # Set the default value for premium_integrations
+      premium_integrations = Organization::PREMIUM_INTEGRATIONS
+
       organization = Organization.new(
-        params.slice(:name, :document_numbering)
+        params.slice(:name, :document_numbering).merge(premium_integrations: premium_integrations)
       )
 
       ActiveRecord::Base.transaction do
