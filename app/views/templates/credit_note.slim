@@ -279,20 +279,6 @@ html
         width: 15%;
       }
 
-      .powered-by {
-        width: 100%;
-        text-align: right;
-      }
-      .powered-by span {
-        color: #8c95a6;
-      }
-      .powered-by img {
-        width: 37px;
-        height: 11px;
-        vertical-align: middle;
-        margin-top: 2px;
-      }
-
     .wrapper
       .mb-24
         h1.credit-note-title = I18n.t('credit_note.document_name')
@@ -487,8 +473,3 @@ html
               = I18n.t('invoice.taxes.reverse_charge')
 
       p.body-3.mb-24 = LineBreakHelper.break_lines(organization.invoice_footer)
-
-      .powered-by
-        span.body-2
-          | #{I18n.t('credit_note.powered_by')} &nbsp;
-        img src="#{::SlimHelper::PDF_LOGO_FILENAME}" alt="Lago Logo"

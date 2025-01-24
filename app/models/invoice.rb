@@ -157,6 +157,12 @@ class Invoice < ApplicationRecord
     File.join(ENV['LAGO_API_URL'], blob_path)
   end
 
+  def payment_url
+    return if id.blank?
+  
+    File.join(ENV['LAGO_API_URL'], "invoices", id, "payment_url")
+  end
+
   def fee_total_amount_cents
     amount_cents = fees.sum(:amount_cents)
     taxes_amount_cents = fees.sum { |f| f.amount_cents * f.taxes_rate }.fdiv(100).round

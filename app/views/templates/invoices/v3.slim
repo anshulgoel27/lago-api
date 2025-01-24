@@ -317,19 +317,6 @@ html
         border-top: 1px solid #d9dee7;
       }
 
-      .powered-by {
-        width: 100%;
-        text-align: right;
-      }
-      .powered-by span {
-        color: #8c95a6;
-      }
-      .powered-by img {
-        width: 37px;
-        height: 11px;
-        vertical-align: middle;
-        margin-top: 2px;
-      }
       .alert {
         display: flex;
         flex-direction: row;
@@ -429,11 +416,6 @@ html
       - if applied_invoice_custom_sections.present?
         == SlimHelper.render('templates/invoices/v3/_custom_sections', self)
       p.body-3.mb-24 = LineBreakHelper.break_lines(organization.invoice_footer)
-
-      .powered-by
-        span.body-2
-          | #{I18n.t('invoice.powered_by')} &nbsp;
-        img src="#{::SlimHelper::PDF_LOGO_FILENAME}" alt="Lago Logo"
 
       - if subscriptions.count > 1
         == SlimHelper.render('templates/invoices/v3/_subscription_details', self)

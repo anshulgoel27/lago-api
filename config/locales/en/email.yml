@@ -51,6 +51,7 @@ en:
         invoice_number: Invoice Number
         issue_date: Issue Date
         subject: 'Your Invoice from %{organization_name} #%{invoice_number}'
+        pay_now: Pay Now
     password_reset:
       subject: Reset your Lago password
     payment_request:

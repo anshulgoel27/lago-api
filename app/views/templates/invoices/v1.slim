@@ -341,19 +341,6 @@ html
         padding-bottom: 24px;
       }
 
-      .powered-by {
-        width: 100%;
-        text-align: right;
-      }
-      .powered-by span {
-        color: #8c95a6;
-      }
-      .powered-by img {
-        width: 37px;
-        height: 11px;
-        vertical-align: middle;
-        margin-top: 2px;
-      }
       .alert {
         display: flex;
         flex-direction: row;
@@ -479,11 +466,6 @@ html
             td.body-1 = total_amount.format(format: I18n.t('money.format'), decimal_mark: I18n.t('money.decimal_mark'), thousands_separator: I18n.t('money.thousands_separator'))
 
       p.body-3.mb-24 = LineBreakHelper.break_lines(organization.invoice_footer)
-
-      .powered-by
-        span.body-2
-          | #{I18n.t('invoice.powered_by')} &nbsp;
-        img src="#{::SlimHelper::PDF_LOGO_FILENAME}" alt="Lago Logo"
 
       - if subscription?
         - subscriptions.each do |subscription|
