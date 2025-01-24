@@ -23,7 +23,7 @@ class Payment < ApplicationRecord
 
   delegate :customer, to: :payable
 
-  enum :payable_payment_status, PAYABLE_PAYMENT_STATUS.map { |s| [s, s] }.to_h
+  enum :payable_payment_status, PAYABLE_PAYMENT_STATUS.map { |s| [s, s] }.to_h, validate: {allow_nil: true}
 
   scope :for_organization, lambda { |organization|
     payables_join = ActiveRecord::Base.sanitize_sql_array([
@@ -32,14 +32,16 @@ class Payment < ApplicationRecord
           ON invoices.id = payments.payable_id
           AND payments.payable_type = 'Invoice'
           AND invoices.organization_id = :org_id
+          AND invoices.status IN (:visible_statuses)
         LEFT JOIN payment_requests
           ON payment_requests.id = payments.payable_id
           AND payments.payable_type = 'PaymentRequest'
           AND payment_requests.organization_id = :org_id
       SQL
-      {org_id: organization.id}
+      {org_id: organization.id, visible_statuses: Invoice::VISIBLE_STATUS.values}
     ])
-    joins(payables_join).where('invoices.id IS NOT NULL OR payment_requests.id IS NOT NULL')
+    joins(payables_join)
+      .where('invoices.id IS NOT NULL OR payment_requests.id IS NOT NULL')
   }
 
   def should_sync_payment?
